@@ -17,6 +17,15 @@ public class Payment {
         this.sumPayment = sumPayment;
     }
 
+    //конструктор для копирования
+    public Payment(Payment originalPayment){
+        this.fullName = originalPayment.fullName;
+        this.day = originalPayment.day;
+        this.month = originalPayment.month;
+        this.year = originalPayment.year;
+        this.sumPayment = originalPayment.sumPayment;
+    }
+
     // Геттеры и сеттеры
 
     public static String getFullName() {
@@ -66,8 +75,11 @@ public class Payment {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Payment payment = (Payment) o;
-        return day == payment.day && month == payment.month && year == payment.year &&
-                sumPayment == payment.sumPayment && Objects.equals(fullName, payment.fullName);
+        return day == payment.day &&
+                month == payment.month &&
+                year == payment.year &&
+                sumPayment == payment.sumPayment &&
+                Objects.equals(fullName, payment.fullName);
     }
 
     @Override
@@ -82,7 +94,7 @@ public class Payment {
                 ", day=" + day +
                 ", month=" + month +
                 ", year=" + year +
-                ", amountInKopecks=" + sumPayment +
+                ", sumPayment=" + sumPayment +
                 '}';
     }
 }

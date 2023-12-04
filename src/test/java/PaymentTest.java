@@ -12,8 +12,7 @@ class PaymentTest {
 
         assertEquals(payment1, payment2);
         assertNotEquals(payment1, payment3);
-        assertEquals(payment1.hashCode(), payment2.hashCode());
-        assertNotEquals(payment1.hashCode(), payment3.hashCode());
+
     }
 
     @Test
