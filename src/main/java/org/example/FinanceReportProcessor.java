@@ -4,40 +4,35 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FinanceReportProcessor {
-    public static FinanceReport getPaymentsByFirstName(FinanceReport report, char startChar){
-        FinanceReport filteredReport = new FinanceReport(report.getNumberPayment(), report.getCreatorName(), report.getData());
-        List<Payment> filteredPayments = new ArrayList<>();
+    public static FinanceReport getPaymentsByFirstName(FinanceReport report, char symbol){
+
+        ArrayList<Payment> filteredPayments = new ArrayList<>();
 
         // Находим платежи людей на заданную букву
-        for (int i = 0; i < report.getNumberPayment(); i++){
-            Payment payment = report.getPayment(i);
-            if (Payment.getFullName().charAt(0) == startChar){
+        for (int i = 0; i < report.getLengthPayment(); i++){
+            Payment payment = report.getIndexArrPayment(i);
+            if (Payment.getFullName().charAt(0) == symbol){
                 filteredPayments.add(payment); // найденные платежи помещаем в список
             }
         }
+        Payment[] newPayments = new Payment[filteredPayments.size()];
+        newPayments = filteredPayments.toArray(newPayments);
 
-        for (int i = 0; i < filteredPayments.size(); i++){
-            filteredReport.setPayment(i, filteredPayments.get(i));
-        }
-
-        return filteredReport;
+        return new FinanceReport(report.getCreatorName(), report.getDayData(), report.getMonthData(), report.getYearData(), newPayments);
     }
 
     public static FinanceReport getPaymentsBelowValue(FinanceReport report, int maxValue){
-        FinanceReport filteredReport = new FinanceReport(report.getNumberPayment(), report.getCreatorName(), report.getData());
-        List<Payment> filteredPayments = new ArrayList<>();
 
-        for (int i = 0; i < report.getNumberPayment(); i++){
-            Payment payment = report.getPayment(i);
+        List<Payment> filteredPayments = new ArrayList<>();
+        for (int i = 0; i < report.getLengthPayment(); i++){
+            Payment payment = report.getIndexArrPayment(i);
             if (Payment.getSumPayment() < maxValue){
                 filteredPayments.add(payment);
             }
         }
+        Payment[] newPayments = new Payment[filteredPayments.size()];
+        newPayments = filteredPayments.toArray(newPayments);
 
-        for (int i = 0; i < filteredPayments.size(); i++){
-            filteredReport.setPayment(i, filteredPayments.get(i));
-        }
-
-        return filteredReport;
+        return new FinanceReport(report.getCreatorName(), report.getDayData(), report.getMonthData(), report.getYearData(), newPayments);
     }
 }

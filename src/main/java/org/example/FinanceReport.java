@@ -5,56 +5,54 @@ import java.util.Arrays;
 import java.util.IllegalFormatWidthException;
 
 public class FinanceReport {
-    private Payment [] payments;
+    private Payment [] arrPayments;
     private String creatorName;
-    private String data;
+    private int dayData;
+    private int monthData;
+    private int yearData;
 
-    public FinanceReport(int numberPayment, String creatorName, String data){
-        this.payments = new Payment[numberPayment];
+    public FinanceReport(String creatorName, int dayDateReport, int monthDateReport, int yearDateReport, Payment[] payments){
+        this.arrPayments = payments;
         this.creatorName = creatorName;
-        this.data = data;
+        this.dayData = dayData;
+        this.monthData = monthData;
+        this.yearData = yearData;
     }
 
     //конструктор копирования
-    public FinanceReport(FinanceReport original){
-        this.creatorName = original.creatorName;
-        this.data = original.data;
+    public FinanceReport(FinanceReport report){
+        creatorName = report.getCreatorName();
+        dayData = report.getDayData();
+        monthData = report.getMonthData();
+        yearData = report.getYearData();
+        arrPayments = report.arrPayments.clone();
 
-        //копирование массива
-        this.payments = Arrays.copyOf(original.payments, original.payments.length);
-        for (int i = 0 ; i < original.payments.length; i++){
-            this.payments[i] = new Payment(original.payments[i]);
-        }
     }
 
-    public int getNumberPayment(){
-        return payments.length;
+    public int getLengthPayment(){ return arrPayments.length; }
+
+    public Payment[] getPayment(){
+        return arrPayments;
     }
 
-    public Payment getPayment(int index){
-        if (index >= 0 && index < payments.length){
-            return payments[index];
-        }
-        throw new IllegalArgumentException("Индекс не имеет доступа к элементам массива");
-    }
-
-    public void setPayment(int index, Payment payment){
-        if (index >= 0 && index < payments.length){
-            payments[index] = payment;
-        }
-        throw new IllegalArgumentException("Индекс не имеет доступа к элементам массива");
+    public void setPayment(Payment[] arrPayments){
+        this.arrPayments = arrPayments;
     }
 
     @Override
     public String toString() {
         StringBuilder string = new StringBuilder();
-        string.append(String.format("Автор: %s, дата: %s, Платежи: [\n", creatorName, data));
-        for (int i = 0; i < payments.length; i++){
+        string.append(String.format("Автор: %s, дата: %d.%d.%d, Платежи: [\n", creatorName, dayData, monthData,yearData));
+        for (int i = 0; i < arrPayments.length; i++){
             string.append(String.format("Плательщик: %s, дата: %d.%d.%d, сумма: %d руб. %d коп. \n",
             Payment.getFullName(), Payment.getDay(), Payment.getMonth(), Payment.getYear(), Payment.getSumPayment()/100, Payment.getSumPayment()%100));
         }
         string.append("]");
         return string.toString();
+    }
+
+    public Payment getIndexArrPayment(int index){
+        return arrPayments[index];
     }
 
     public String getCreatorName() {
@@ -65,11 +63,27 @@ public class FinanceReport {
         this.creatorName = creatorName;
     }
 
-    public String getData() {
-        return data;
+    public int getDayData() {
+        return dayData;
     }
 
-    public void setData(String data) {
-        this.data = data;
+    public void setDayData(int dayData) {
+        this.dayData = dayData;
+    }
+
+    public int getMonthData() {
+        return monthData;
+    }
+
+    public void setMonthData(int monthData) {
+        this.monthData = monthData;
+    }
+
+    public int getYearData() {
+        return yearData;
+    }
+
+    public void setYearData(int yearData) {
+        this.yearData = yearData;
     }
 }

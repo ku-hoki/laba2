@@ -1,26 +1,29 @@
 package org.example;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class FinanceReportProcessorTest {
 
+    private FinanceReport testReport;
+    @BeforeEach
+    void setTestReport(){
+        Payment[] payments = {
+                new Payment("Sokolov", 8, 11, 2023, 30000),
+                new Payment("Ivanov", 3, 8, 2023, 5000),
+                new Payment("Nikonov", 1, 3, 2023, 11001),
+                new Payment("Salamonow", 10, 10, 2023, 280)
+
+        };
+        testReport = new FinanceReport("Test", 12, 12, 2023, payments);
+
+    }
     @Test
     public void testGetPaymentsByFirstName() {
-        FinanceReport report = new FinanceReport(5, "John Smith", null);
-        report.setPayment(0, new Payment("Alice Johnson", 10, 11, 2021, 5000));
-        report.setPayment(1, new Payment("Bob Williams", 15, 12, 2022, 7000));
-        report.setPayment(2, new Payment("Charlie Brown", 20, 1, 2023, 3000));
-        report.setPayment(3, new Payment("David Smith", 25, 2, 2023, 4000));
-        report.setPayment(4, new Payment("Emma Johnson", 1, 3, 2023, 6000));
+        FinanceReport searchTest1 = FinanceReportProcessor.getPaymentsByFirstName(testReport, 'N');
+        assertEquals(1, searchTest1.getPayment().length);
 
-        // Фильтрация платежей по начальной букве фамилии 'J'
-        FinanceReport filteredReport = FinanceReportProcessor.getPaymentsByFirstName(report, 'J');
-
-        // Проверка корректности фильтрации
-        assertEquals(2, filteredReport.getNumberPayment()); // Ожидается, что найдено 2 платежа
-        assertEquals("Alice Johnson", filteredReport.getPayment(0).getFullName());
-        assertEquals("Emma Johnson", filteredReport.getPayment(1).getFullName());
     }
 }
