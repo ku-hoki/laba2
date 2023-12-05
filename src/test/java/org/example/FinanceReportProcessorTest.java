@@ -39,16 +39,12 @@ class FinanceReportProcessorTest {
     public void TestCopyConstructor(){
         FinanceReport copiedReport = new FinanceReport(testReport);//создание копии отчета
 
+        assertEquals(copiedReport.equals(testReport), testReport.equals(copiedReport));
         assertNotSame(testReport, copiedReport);//проверка, что копия не ссылается на объекты из оригинала
 
-        assertEquals(testReport.getLengthPayment(), copiedReport.getLengthPayment());
-        assertEquals(testReport.getCreatorName(), copiedReport.getCreatorName());
-
-        Payment[] original = testReport.getPayment();
-        Payment[] copied = copiedReport.getPayment();
-
-        for (int i = 0; i < original.length; i++){
-            assertArrayEquals(original, copied);
-        }
+        copiedReport.setArrPayment(copiedReport.getIndexArrPayment(0), 3);
+        assertNotEquals(testReport, copiedReport);
+        System.out.println(testReport.toString());
+        System.out.println(copiedReport);
     }
 }

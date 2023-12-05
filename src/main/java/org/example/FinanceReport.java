@@ -84,4 +84,8 @@ public class FinanceReport {
     public void setYearData(int yearData) {
         this.yearData = yearData;
     }
+
+    public void setArrPayment(Payment payment, int numberPayment) {
+        arrPayments[numberPayment] = payment;
+    }
 }
