@@ -3,11 +3,11 @@ package org.example;
 import java.util.Objects;
 
 public class Payment {
-    private static String fullName;
-    private static int day;
-    private static int month;
-    private static int year;
-    private static int sumPayment;
+    private String fullName;
+    private int day;
+    private int month;
+    private int year;
+    private int sumPayment;
 
     public Payment(String fullName, int day, int month, int year, int sumPayment) {
         this.fullName = fullName;
@@ -28,7 +28,7 @@ public class Payment {
 
     // Геттеры и сеттеры
 
-    public static String getFullName() {
+    public String getFullName() {
         return fullName;
     }
 
@@ -38,7 +38,7 @@ public class Payment {
         this.fullName = fullName;
     }
 
-    public static int getDay() {
+    public int getDay() {
         return day;
     }
 
@@ -46,7 +46,7 @@ public class Payment {
         this.day = day;
     }
 
-    public static int getMonth() {
+    public int getMonth() {
         return month;
     }
 
@@ -54,7 +54,7 @@ public class Payment {
         this.month = month;
     }
 
-    public static int getYear() {
+    public int getYear() {
         return year;
     }
 
@@ -62,7 +62,7 @@ public class Payment {
         this.year = year;
     }
 
-    public static int getSumPayment() {
+    public int getSumPayment() {
         return sumPayment;
     }
 

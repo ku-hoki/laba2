@@ -1,9 +1,6 @@
 package org.example;
 
 
-import java.util.Arrays;
-import java.util.IllegalFormatWidthException;
-
 public class FinanceReport {
     private Payment [] arrPayments;
     private String creatorName;
@@ -14,9 +11,9 @@ public class FinanceReport {
     public FinanceReport(String creatorName, int dayDateReport, int monthDateReport, int yearDateReport, Payment[] payments){
         this.arrPayments = payments;
         this.creatorName = creatorName;
-        this.dayData = dayData;
-        this.monthData = monthData;
-        this.yearData = yearData;
+        this.dayData = dayDateReport;
+        this.monthData = monthDateReport;
+        this.yearData = yearDateReport;
     }
 
     //конструктор копирования
@@ -44,8 +41,9 @@ public class FinanceReport {
         StringBuilder string = new StringBuilder();
         string.append(String.format("Автор: %s, дата: %d.%d.%d, Платежи: [\n", creatorName, dayData, monthData,yearData));
         for (int i = 0; i < arrPayments.length; i++){
+            Payment payment = arrPayments[i];
             string.append(String.format("Плательщик: %s, дата: %d.%d.%d, сумма: %d руб. %d коп. \n",
-            Payment.getFullName(), Payment.getDay(), Payment.getMonth(), Payment.getYear(), Payment.getSumPayment()/100, Payment.getSumPayment()%100));
+            payment.getFullName(), payment.getDay(), payment.getMonth(), payment.getYear(), payment.getSumPayment()/100, payment.getSumPayment()%100));
         }
         string.append("]");
         return string.toString();

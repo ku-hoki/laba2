@@ -23,7 +23,32 @@ class FinanceReportProcessorTest {
     @Test
     public void testGetPaymentsByFirstName() {
         FinanceReport searchTest1 = FinanceReportProcessor.getPaymentsByFirstName(testReport, 'N');
-        assertEquals(1, searchTest1.getPayment().length);
+        assertEquals(1, searchTest1.getLengthPayment());
+        FinanceReport searchTest2 = FinanceReportProcessor.getPaymentsByFirstName(testReport, 'A');
+        assertEquals(0, searchTest2.getLengthPayment());
+    }
+    @Test
+    public void testGetPaymentsBelowValue() {
+        FinanceReport sumT1 = FinanceReportProcessor.getPaymentsBelowValue(testReport, 20000);
+        assertEquals(3, sumT1.getLengthPayment());
+        FinanceReport sumTest3 = FinanceReportProcessor.getPaymentsBelowValue(testReport, 100);
+        assertEquals(0, sumTest3.getLengthPayment());
+    }
 
+    @Test
+    public void TestCopyConstructor(){
+        FinanceReport copiedReport = new FinanceReport(testReport);//создание копии отчета
+
+        assertNotSame(testReport, copiedReport);//проверка, что копия не ссылается на объекты из оригинала
+
+        assertEquals(testReport.getLengthPayment(), copiedReport.getLengthPayment());
+        assertEquals(testReport.getCreatorName(), copiedReport.getCreatorName());
+
+        Payment[] original = testReport.getPayment();
+        Payment[] copied = copiedReport.getPayment();
+
+        for (int i = 0; i < original.length; i++){
+            assertArrayEquals(original, copied);
+        }
     }
 }
