@@ -45,6 +45,6 @@ class FinanceReportProcessorTest {
         copiedReport.setArrPayment(copiedReport.getIndexArrPayment(0), 3);
         assertNotEquals(testReport, copiedReport);
         System.out.println(testReport.toString());
-        System.out.println(copiedReport);
+        System.out.println(copiedReport.toString());
     }
 }

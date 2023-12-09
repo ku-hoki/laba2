@@ -89,12 +89,8 @@ public class Payment {
 
     @Override
     public String toString() {
-        return "Payment{" +
-                "fullName='" + fullName + '\'' +
-                ", day=" + day +
-                ", month=" + month +
-                ", year=" + year +
-                ", sumPayment=" + sumPayment +
-                '}';
+
+        return String.format("Плательщик: %s, дата: %d.%d.%d, сумма: %d руб. %d коп. \n",
+                fullName, day, month, year, sumPayment/100, sumPayment%100);
     }
 }

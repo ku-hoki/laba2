@@ -42,8 +42,7 @@ public class FinanceReport {
         string.append(String.format("Автор: %s, дата: %d.%d.%d, Платежи: [\n", creatorName, dayData, monthData,yearData));
         for (int i = 0; i < arrPayments.length; i++){
             Payment payment = arrPayments[i];
-            string.append(String.format("Плательщик: %s, дата: %d.%d.%d, сумма: %d руб. %d коп. \n",
-            payment.getFullName(), payment.getDay(), payment.getMonth(), payment.getYear(), payment.getSumPayment()/100, payment.getSumPayment()%100));
+            string.append(payment.toString());
         }
         string.append("]");
         return string.toString();
